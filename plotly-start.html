@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+
+    <title>Plotly Start</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Line and Scatter Plot</h1>
+      <div id="chart1"></div>
+      <br></br>
+      <h1>3D Surface Graph</h1>
+      <div id="chart2"></div>
+      <br></br>
+      <h1>Heatmap</h1>
+      <div id="chart3"></div>
+      <br></br>
+    </div>
+
+    <!-- Line and Scatter Plot -->
+    <script>
+      var trace1 = {
+      x: [1, 2, 3, 4],
+      y: [10, 15, 13, 17],
+      mode: 'markers',
+      type: 'scatter'
+      };
+
+      var trace2 = {
+      x: [2, 3, 4, 5],
+      y: [16, 5, 11, 9],
+      mode: 'lines',
+      type: 'scatter'
+      };
+
+      var trace3 = {
+      x: [1, 2, 3, 4],
+      y: [12, 9, 15, 12],
+      mode: 'lines+markers',
+      type: 'scatter'
+      };
+
+      var data = [trace1, trace2, trace3];
+
+      Plotly.newPlot('chart1', data);
+    </script>
+
+    <!-- 3D Surface -->
+    <script>
+      Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/api_docs/mt_bruno_elevation.csv', function(err, rows){
+      function unpack(rows, key) {
+        return rows.map(function(row) { return row[key]; });
+      }
+
+      var z_data=[ ]
+      for(i=0;i<24;i++)
+      {
+        z_data.push(unpack(rows,i));
+      }
+
+      var data = [{
+                 z: z_data,
+                 type: 'surface'
+              }];
+
+      var layout = {
+        title: 'Mt Bruno Elevation',
+        autosize: false,
+        width: 500,
+        height: 500,
+        margin: {
+          l: 65,
+          r: 50,
+          b: 65,
+          t: 90,
+        }
+      };
+      Plotly.newPlot('chart2', data, layout);
+      });
+    </script>
+
+    <!-- Heatmap -->
+    <script>
+      var data = [
+      {
+        z: [[1, 20, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, -10, 20]],
+        x: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        y: ['Morning', 'Afternoon', 'Evening'],
+        type: 'heatmap'
+      }
+      ];
+
+      Plotly.newPlot('chart3', data);
+    </script>
+
+  </body>
+</html>

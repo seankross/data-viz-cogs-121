@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/c3@0.6.0/c3.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@5.4.0/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/c3@0.6.0/c3.min.js"></script>
+
+    <title>C3 Start</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Simple Line Graph</h1>
+      <div id="chart1"></div>
+      <button type="button" id="button1-show" class="btn btn-primary btn-lg">Show Series</button>
+      <button type="button" id="button1-hide" class="btn btn-primary btn-lg">Hide Series</button>
+      <br></br>
+      <h1>Simple Bar Graph</h1>
+      <div id="chart2"></div>
+      <button type="button" id="button2-show" class="btn btn-primary btn-lg">Show Data</button>
+      <button type="button" id="button2-hide" class="btn btn-primary btn-lg">Hide Data</button>
+      <br></br>
+    </div>
+
+    <script>
+      var chart1 = c3.generate({
+        bindto: '#chart1',
+        data: {
+          columns: [
+            ['data1', 30, 200, 100, 400, 150, 250],
+            ['data2', 50, 20, 10, 40, 15, 25]
+          ]
+        }
+      });
+
+      $( "#button1-show" ).click(function() {
+        chart1.show(['data1']);
+      });
+
+      $( "#button1-hide" ).click(function() {
+        chart1.hide(['data1']);
+      });
+
+      var chart2 = c3.generate({
+          bindto: '#chart2',
+          data: {
+              columns: [
+                  ['data1', 30, 200, 100, 400, 150, 250],
+                  ['data2', 130, 100, 140, 200, 150, 50],
+                  ['data3', 130, -150, 200, 300, -200, 100]
+              ],
+              type: 'bar'
+          },
+          bar: {
+              width: {
+                  ratio: 0.5 // this makes bar width 50% of length between ticks
+              }
+          }
+      });
+
+      $( "#button2-show" ).click(function() {
+        chart2.show(['data3']);
+      });
+
+      $( "#button2-hide" ).click(function() {
+        chart2.hide(['data3']);
+      });
+    </script>
+  </body>
+</html>
